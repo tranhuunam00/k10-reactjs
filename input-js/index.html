@@ -21,23 +21,37 @@
         <p id="errorUserName" style="color: red">empty</p>
       </div>
 
-      <h4>Password</h4>
-      <input
-        id="password"
-        type="text"
-        name="password"
-        id=""
-        placeholder="password"
-      />
-      <h4>Sex</h4>
+      <div class="divPassword">
+        <h4>Password</h4>
+        <input
+          id="password"
+          type="text"
+          name="password"
+          id=""
+          placeholder="password"
+        />
+        <p id="errorPassword" style="color: red">empty</p>
+      </div>
 
-      <label for="">Male</label> <input id="male" name="sex" type="radio" />
-      <label for="">FE_MALE</label>
-      <input id="female" name="sex" type="radio" />
-      <h4>Dob</h4>
-      <input id="dOB" type="date" name="dOB" id="" />
-      <h4>email</h4>
-      <input id="email" type="text" name="email" id="" placeholder="email" />
+      <div class="divSex">
+        <h4>Sex</h4>
+        <label for="">Male</label> <input id="male" name="sex" type="radio" />
+        <label for="">FE_MALE</label>
+        <input id="female" name="sex" type="radio" />
+        <p id="errorSex" style="color: red">empty</p>
+      </div>
+
+      <div class="divDob">
+        <h4>Dob</h4>
+        <input id="dOB" type="date" name="dOB" id="" />
+        <p id="errorDob" style="color: red">empty</p>
+      </div>
+
+      <div class="divEmail">
+        <h4>email</h4>
+        <input id="email" type="text" name="email" id="" placeholder="email" />
+        <p id="errorEmail" style="color: red">empty</p>
+      </div>
     </form>
   </body>
   <script>
@@ -52,6 +66,21 @@
     const femaleELe = document.getElementById("female");
 
     // gắn 1 sự kiện vào thẻ input của username
+    nameEle.addEventListener("keyup", (event) => {
+      const { name, value, checked } = event.target;
+
+      // get element
+      const divUserName = document.querySelector(".divUserName");
+      const pErrorEle = divUserName.querySelector("#errorUserName");
+
+      // check dk
+      if (!value || value.length < 6) {
+        pErrorEle.innerText = "ban hay nhap 6 ki tu";
+      } else {
+        pErrorEle.innerText = "empty";
+      }
+    });
+
     nameEle.addEventListener("keyup", (event) => {
       const { name, value, checked } = event.target;
 
