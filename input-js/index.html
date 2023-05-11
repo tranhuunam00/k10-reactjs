@@ -37,7 +37,7 @@
         <h4>Sex</h4>
         <label for="">Male</label> <input id="male" name="sex" type="radio" />
         <label for="">FE_MALE</label>
-        <input id="female" name="sex" type="radio" />
+        <input id="female" name="sex" type="radio" checked="true" />
         <p id="errorSex" style="color: red">empty</p>
       </div>
 
@@ -81,16 +81,49 @@
       }
     });
 
-    nameEle.addEventListener("keyup", (event) => {
+    passwordEle.addEventListener("keyup", (event) => {
       const { name, value, checked } = event.target;
 
       // get element
-      const divUserName = document.querySelector(".divUserName");
-      const pErrorEle = divUserName.querySelector("#errorUserName");
+      const divUserName = document.querySelector(".divPassword");
+      const pErrorEle = divUserName.querySelector("#errorPassword");
 
       // check dk
       if (!value || value.length < 6) {
         pErrorEle.innerText = "ban hay nhap 6 ki tu";
+      } else {
+        pErrorEle.innerText = "empty";
+      }
+    });
+
+    emailEle.addEventListener("keyup", (event) => {
+      const { name, value, checked } = event.target;
+
+      // get element
+      const divUserName = document.querySelector(".divEmail");
+      const pErrorEle = divUserName.querySelector("#errorEmail");
+
+      // check dk
+      if (!value || value.length < 6) {
+        pErrorEle.innerText = "ban hay nhap 6 ki tu";
+      } else {
+        pErrorEle.innerText = "empty";
+      }
+    });
+
+    maleELe.addEventListener("click", (event) => {
+      const { name, value, checked } = event.target;
+    });
+
+    dOBEle.addEventListener("change", (event) => {
+      const { name, value, checked } = event.target;
+
+      // get element
+      const divUserName = document.querySelector(".divDob");
+      const pErrorEle = divUserName.querySelector("#errorDob");
+      // check dk
+      if (!value || new Date(value).getTime() > new Date().getTime() - 2000) {
+        pErrorEle.innerText = "nhap nho hon bay h";
       } else {
         pErrorEle.innerText = "empty";
       }
