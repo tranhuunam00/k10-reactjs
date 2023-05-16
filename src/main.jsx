@@ -16,6 +16,7 @@ import { Provider } from "react-redux";
 import { Counter } from "./features/counter/counter";
 import { PostsList } from "./features/posts/PostsList";
 import { AddPostForm } from "./features/posts/AddPostForm";
+import { SinglePostPage } from "./features/posts/SinglePostPage";
 
 const router = createBrowserRouter([
   {
@@ -37,9 +38,14 @@ const router = createBrowserRouter([
             path: "posts/",
             element: <PostsList />,
           },
+
           {
             path: "posts/edit",
             element: <AddPostForm />,
+          },
+          {
+            path: "posts/:postId",
+            element: <SinglePostPage />,
           },
           {
             path: "contacts/:contactId",
