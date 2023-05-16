@@ -70,44 +70,14 @@
     const maleELe = document.getElementById("male");
     const femaleELe = document.getElementById("female");
 
-    const validate = (type = "username", value, listError = {}) => {
-      const listErrorType = Object.keys(listError);
-      let error = "";
-      switch (type) {
-        case "username":
-          if (listErrorType.includes("required") && !value) {
-            error = "hay nhap gia tri";
-            break;
-          }
-          if (
-            listErrorType.includes("minlength") &&
-            value.length < listError["minlength"]
-          ) {
-            error = "ban  hay nhap" + listError["minlength"] + " ki tu";
-            break;
-          }
-          if (
-            listErrorType.includes("maxlength") &&
-            value.length > listError["maxlength"]
-          ) {
-            error = "ban  hay nhap" + listError["maxlength"] + " ki tu";
-            break;
-          }
-          if (
-            listErrorType.includes("theFirstLetter") &&
-            value[0] !== value[0].toUpperCase()
-          ) {
-            error = "hay viet hoa ki tu dau";
-            break;
-          }
-          error = null;
-          break;
-        case "password":
-          break;
-      }
-
-      return error;
+    const ERROR_CHECK_LIST_TYPE = {
+      required: "required",
+      minLength: "minLength",
+      maxLength: "maxLength",
+      dataType: "dataType",
     };
+
+    const validate = (type = "username", value, listError = {}) => {};
 
     const checkSubmit = () => {
       if (
@@ -148,12 +118,6 @@
       e.preventDefault();
     });
 
-    const ERROR_CHECK_LIST_TYPE = {
-      required: "required",
-      minlength: "minlength",
-    };
-
-    console.log(ERROR_CHECK_LIST_TYPE);
     // gắn 1 sự kiện vào thẻ input của username
     nameEle.addEventListener("keyup", (event) => {
       const { name, value, checked } = event.target;
@@ -162,15 +126,6 @@
       // get element
       const divUserName = document.querySelector(".divUserName");
       const pErrorEle = divUserName.querySelector("#errorUserName");
-
-      console.log(nameEle.hasAttribute("required"));
-      const errorList = {
-        minlength: nameEle.getAttribute("minlength"),
-        maxlength: nameEle.getAttribute("maxlength2"),
-        required: nameEle.getAttribute("required"),
-      };
-
-      console.log(errorList);
 
       // check dk
 
@@ -229,6 +184,7 @@
       formValue.sex = checked;
       checkSubmit();
     });
+
     femaleELe.addEventListener("click", (event) => {
       const { name, value, checked } = event.target;
       formValue.sex = checked;
