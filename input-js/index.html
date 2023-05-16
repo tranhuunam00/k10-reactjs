@@ -17,9 +17,7 @@
           name="username"
           id=""
           placeholder="username"
-          required="true"
-          minlength="6"
-          maxlength2="12"
+          valid="required|minLength:6|maxLength:12"
         />
         <p id="errorUserName" style="color: red"></p>
       </div>
@@ -71,13 +69,56 @@
     const femaleELe = document.getElementById("female");
 
     const ERROR_CHECK_LIST_TYPE = {
-      required: "required",
-      minLength: "minLength",
-      maxLength: "maxLength",
+      required: "Bạn cần nhập trường ",
+      minLength: "yêu cầu tối thiểu cho ",
+      maxLength: "yêu cầu tối data cho ",
       dataType: "dataType",
+      min: "min",
+      max: "max",
+      format: "format",
     };
+    const parseValid = (validString) => {
+      if (!validString) return {};
 
-    const validate = (type = "username", value, listError = {}) => {};
+      // b1 tach chuoi theo  "|"
+      const arrayError = validString.split("|");
+      // b2 lap qua tung phan
+      return arrayError.reduce((pre, cur) => {
+        // b3 tach theo ":"
+        const [key, value = true] = cur.split(":");
+        // b4 nhet vao object
+        return { ...pre, [key]: value };
+      }, {});
+    };
+    const validate = (type = "username", value, listError = {}) => {
+      console.log(listError);
+      let error = null;
+
+      for (let key in listError) {
+        switch (key) {
+          case "required":
+            error = !value ? ERROR_CHECK_LIST_TYPE[key] : null;
+            break;
+          case "minLength":
+            error =
+              value.length < +listError[key]
+                ? ERROR_CHECK_LIST_TYPE[key] + listError[key] + " kí tự"
+                : null;
+            break;
+          case "maxLength":
+            error =
+              value.length > +listError[key]
+                ? ERROR_CHECK_LIST_TYPE[key] + listError[key] + " kí tự"
+                : null;
+            break;
+        }
+        if (error) {
+          break;
+        }
+      }
+      console.log(error);
+      return error;
+    };
 
     const checkSubmit = () => {
       if (
@@ -128,8 +169,9 @@
       const pErrorEle = divUserName.querySelector("#errorUserName");
 
       // check dk
-
-      const error = validate("username", value, errorList);
+      const valid = nameEle.getAttribute("valid");
+      const validObject = parseValid(valid);
+      const error = validate(name, value, validObject);
 
       if (error) {
         pErrorEle.innerText = error;
