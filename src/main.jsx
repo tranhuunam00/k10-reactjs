@@ -13,6 +13,7 @@ import { action as destroyAction } from "./routes/destroy";
 import Index from "./routes";
 import store from "./app/store";
 import { Provider } from "react-redux";
+import { Counter } from "./features/counter/counter";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
           { index: true, element: <Index /> },
+          {
+            path: "counter",
+            element: <Counter />,
+          },
           {
             path: "contacts/:contactId",
             element: <Contact />,
