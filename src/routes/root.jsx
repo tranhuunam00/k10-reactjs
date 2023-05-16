@@ -6,6 +6,7 @@ import {
   NavLink,
   useNavigation,
   useSubmit,
+  Link,
 } from "react-router-dom";
 import { createContact, getContacts } from "../contacts";
 import { useEffect } from "react";
@@ -62,6 +63,9 @@ export default function Root() {
           <Form method="post">
             <button type="submit">New</button>
           </Form>
+          <Link to={`/posts`} className="button muted-button">
+            View Post
+          </Link>
         </div>
         <nav>
           {contacts.length ? (
