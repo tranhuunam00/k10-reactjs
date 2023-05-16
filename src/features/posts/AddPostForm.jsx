@@ -19,7 +19,7 @@ export const AddPostForm = () => {
   const onAuthorChanged = (e) => setUserId(e.target.value);
 
   const canSave = Boolean(title) && Boolean(content) && Boolean(userId);
-
+  console.log(users);
   const usersOptions = users.map((user) => (
     <option key={user.id} value={user.id}>
       {user.name}
@@ -28,7 +28,7 @@ export const AddPostForm = () => {
 
   const onSavePostClicked = () => {
     if (title && content) {
-      dispatch(postAdded(title, content));
+      dispatch(postAdded(title, content, userId));
 
       setTitle("");
       setContent("");
