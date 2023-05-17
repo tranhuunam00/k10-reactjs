@@ -10,6 +10,8 @@ import {
 } from "react-router-dom";
 import { createContact, getContacts } from "../contacts";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchNotifications } from "../features/notifications/notificationsSlice";
 
 export async function loader({ request }) {
   const url = new URL(request.url);
@@ -24,6 +26,8 @@ export async function action() {
 }
 
 export default function Root() {
+  const dispatch = useDispatch();
+
   const { contacts, q } = useLoaderData();
   const navigation = useNavigation();
   const submit = useSubmit();
@@ -73,6 +77,19 @@ export default function Root() {
             View Users
           </Link>
         </div>
+        <nav>
+          <Link to={`/notifications`} className="button muted-button">
+            Notifications
+          </Link>
+          <button
+            className="button"
+            onClick={() => {
+              dispatch(fetchNotifications());
+            }}
+          >
+            Refresh Notifications
+          </button>
+        </nav>
         <nav>
           {contacts.length ? (
             <ul>
