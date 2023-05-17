@@ -5,11 +5,7 @@ export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
   return response.data;
 });
 
-const initialState = [
-  { id: "0", name: "Tianna Jenkins" },
-  { id: "1", name: "Kevin Grant" },
-  { id: "2", name: "Madison Price" },
-];
+const initialState = [];
 
 const usersSlice = createSlice({
   name: "users",
@@ -21,5 +17,10 @@ const usersSlice = createSlice({
     });
   },
 });
+
+export const selectAllUsers = (state) => state.users;
+
+export const selectUserById = (state, userId) =>
+  state.users.find((user) => user.id === userId);
 
 export default usersSlice.reducer;

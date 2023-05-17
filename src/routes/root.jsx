@@ -69,6 +69,9 @@ export default function Root() {
           <Link to={`/posts/edit`} className="button muted-button">
             Add Post
           </Link>
+          <Link to={`/users`} className="button muted-button">
+            View Users
+          </Link>
         </div>
         <nav>
           {contacts.length ? (

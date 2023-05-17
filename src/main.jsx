@@ -20,6 +20,8 @@ import { SinglePostPage } from "./features/posts/SinglePostPage";
 import { EditPostForm } from "./features/posts/EditPostForm";
 import { worker } from "./api/server";
 import { fetchUsers } from "./features/users/usersSlice";
+import { UsersList } from "./features/users/UsersList";
+import { UserPage } from "./features/users/UserPage";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +36,11 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <Index /> },
           {
+            path: "users",
+            element: <UsersList />,
+          },
+          { path: "users/:userId", element: <UserPage /> },
+          {
             path: "counter",
             element: <Counter />,
           },
@@ -46,7 +53,6 @@ const router = createBrowserRouter([
             path: "posts/edit",
             element: <AddPostForm />,
           },
-
           {
             path: "edit-post/:postId",
             element: <EditPostForm />,

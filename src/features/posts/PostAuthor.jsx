@@ -2,9 +2,7 @@
 import { useSelector } from "react-redux";
 
 export const PostAuthor = ({ userId }) => {
-  console.log(userId);
   const author = useSelector((state) => {
-    console.log(state.users);
     return state.users.find((user) => user.id === userId);
   });
 
