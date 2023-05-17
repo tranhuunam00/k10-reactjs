@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import { TimeAgo } from "./TimeAgo";
 import { PostAuthor } from "./PostAuthor";
 import { ReactionButtons } from "./ReactionButtons";
+import { selectAllPosts } from "./postsSlice";
 
 export const PostsList = () => {
-  const posts = useSelector((state) => state.posts);
+  const posts = useSelector(selectAllPosts);
   const orderedPosts = posts
     .slice()
     .sort((a, b) => b.date.localeCompare(a.date));
@@ -16,6 +17,9 @@ export const PostsList = () => {
       <p className="post-content">{post.content.substring(0, 100)}</p>
       <Link to={`/posts/${post.id}`} className="button muted-button">
         View Post
+      </Link>
+      <Link to={`/edit-post/${post.id}`} className="button muted-button">
+        Edit Post
       </Link>
       <TimeAgo timestamp={post.date} />
       <PostAuthor userId={post.user} />
