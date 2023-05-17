@@ -21,6 +21,7 @@
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.11.1",
+    "redux-saga": "^1.2.3",
     "seedrandom": "^3.0.5",
     "sort-by": "^1.2.0",
     "txtgen": "^3.0.5"

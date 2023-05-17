@@ -77,6 +77,15 @@ const postsSlice = createSlice({
         existingPost.content = content;
       }
     },
+    getBySaga(state, action) {
+      console.log("---reducer ---getBySaga----");
+    },
+    getBySagaSuccess(state, action) {
+      console.log("---reducer ---getBySagaSucces----");
+    },
+    getBySagaFail(state, action) {
+      console.log("---reducer ---getBySagaFail----");
+    },
   },
   extraReducers(builder) {
     builder
@@ -123,6 +132,13 @@ export const addNewPost = createAsyncThunk(
   }
 );
 
-export const { postAdded, postUpdated, reactionAdded } = postsSlice.actions;
+export const {
+  postAdded,
+  postUpdated,
+  reactionAdded,
+  getBySagaSuccess,
+  getBySagaFail,
+  getBySaga,
+} = postsSlice.actions;
 
 export default postsSlice.reducer;

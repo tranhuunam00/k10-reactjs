@@ -12,6 +12,7 @@ import { createContact, getContacts } from "../contacts";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchNotifications } from "../features/notifications/notificationsSlice";
+import { getBySaga } from "../features/posts/postsSlice";
 
 export async function loader({ request }) {
   const url = new URL(request.url);
@@ -88,6 +89,15 @@ export default function Root() {
             }}
           >
             Refresh Notifications
+          </button>
+
+          <button
+            className="button"
+            onClick={() => {
+              dispatch(getBySaga());
+            }}
+          >
+            Test Saga
           </button>
         </nav>
         <nav>
