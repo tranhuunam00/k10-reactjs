@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { TimeAgo } from "./TimeAgo";
 import { PostAuthor } from "./PostAuthor";
+import { ReactionButtons } from "./ReactionButtons";
 
 export const PostsList = () => {
   const posts = useSelector((state) => state.posts);
@@ -18,6 +19,7 @@ export const PostsList = () => {
       </Link>
       <TimeAgo timestamp={post.date} />
       <PostAuthor userId={post.user} />
+      <ReactionButtons post={post} />
     </article>
   ));
 
