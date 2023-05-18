@@ -1,14 +1,11 @@
 import React from "react";
-const LoginComponent = () => {
-  const items = ["Item 1", "Item 2", "Item 3"];
 
-  return (
-    <ul>
-      {items.map((item) => (
-        <li key={item}>{item}</li>
-      ))}
-    </ul>
-  );
+export function Clock({ color, time }) {
+  return <h1 style={{ color: color }}>{time}</h1>;
+}
+
+const LoginComponent = () => {
+  return <Clock time="hehe" color={"red"} />;
 };
 
 export default LoginComponent;

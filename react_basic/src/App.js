@@ -16,7 +16,7 @@ const person = {
 const today = new Date();
 
 function App() {
-  return <h1>{person.name}'s Todos</h1>;
+  return <LoginComponent />;
 }
 
 export default App;
