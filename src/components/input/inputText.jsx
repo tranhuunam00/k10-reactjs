@@ -1,11 +1,13 @@
-import styles from "./style.scss";
+import styles from "./style.module.scss";
 
-const InputText = () => {
+console.log(styles);
+
+const InputText = ({ label, type, error }) => {
   return (
-    <div>
-      <h5>Label</h5>
-      <input type="text" placeholder="Nhập..." />
-      <p>error</p>
+    <div className={styles.inputCom}>
+      <h5>{label}</h5>
+      <input type={type} placeholder="Nhập..." />
+      <p>{error}</p>
     </div>
   );
 };
