@@ -1,13 +1,21 @@
 import React, { useState } from "react";
 import IMAGE_APP from "../../assets/image";
-import InputText from "../../components/input/inputText";
+import InputCustom from "../../components/input/inputCustom";
 
 const LoginPage = () => {
   return (
     <div>
       <h1>SIGN IN</h1>
       <img src={IMAGE_APP.iconMain} alt="" />
-      <InputText label={"Email"} type={"text"} error="error"></InputText>
+      <InputCustom label={"Email"} type={"text"} error="error"></InputCustom>
+      <InputCustom label={"Password"} type={"text"} error="error"></InputCustom>
+      <button
+        onClick={() => {
+          console.log("hjehe");
+        }}
+      >
+        submit
+      </button>
     </div>
   );
 };
