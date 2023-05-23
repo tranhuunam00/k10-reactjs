@@ -4,6 +4,7 @@ import InputCustom from "../../components/input/inputCustom";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleChangeInput = (e) => {
     const { name, value } = e;
@@ -26,6 +27,7 @@ const LoginPage = () => {
       <button
         onClick={() => {
           console.log(username);
+          console.log(password);
         }}
       >
         submit
