@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
-const LoginPage = () => {};
+const LoginPage = () => {
+  <div></div>;
+};
 
 export default LoginPage;
