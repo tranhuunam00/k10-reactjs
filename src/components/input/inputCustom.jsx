@@ -21,9 +21,9 @@ const InputCustom = ({
           onChange={(e) => onChange(e.target)}
           type={type}
           placeholder={placeholder}
-          valid={validate}
+          validate={validate}
         />
-        <p>{"heheheh"}</p>
+        <p>{error}</p>
       </div>
     </div>
   );
