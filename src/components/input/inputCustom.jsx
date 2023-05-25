@@ -3,8 +3,8 @@ import styles from "./style.module.scss";
 
 const InputCustom = ({
   label,
-  type,
-  error,
+  type = "text",
+  error = null,
   onChange = () => {},
   name,
   placeholder,
