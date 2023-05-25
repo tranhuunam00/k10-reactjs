@@ -18,6 +18,7 @@ const RegisterPage = () => {
             label={"Email"}
             placeholder={"Nhập email... "}
             onChange={handleInput}
+            icon={IMAGE_APP.emailIcon}
           />
         </div>
       </div>
