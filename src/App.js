@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import "./App.css";
 import LoginPage from "./modules/auth/login";
 import RegisterPage from "./modules/auth/register/register";
@@ -43,7 +43,19 @@ const Todo = ({ value, index, onDeletee }) => {
   );
 };
 function App() {
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case "ADD":
+        return [...state, action.payload];
+      case "REMOVE":
+        return state.filter((item) => item.id !== action.payload.id);
+      default:
+        return state;
+    }
+  };
   const [listUser, setListUser] = useState(LIST_USER);
+  const [listUser2, dispatch] = useReducer(reducer, []);
+
   const [name, setName] = useState("");
   const [money, setMoney] = useState(0);
 
@@ -51,13 +63,16 @@ function App() {
     const removeList = listUser.filter(
       (valuee, indexx) => valuee.id !== value.id
     );
-    setListUser(removeList);
+    dispatch({
+      type: "REMOVE",
+      payload: value,
+    });
   };
 
   return (
     <div>
       <h1>List todo</h1>
-      {listUser.map((value, index) => {
+      {listUser2.map((value, index) => {
         return (
           <Todo
             key={value.id}
@@ -90,7 +105,7 @@ function App() {
 
       <button
         onClick={async () => {
-          if (!name || !money) return alert("nhap di");
+          // if (!name || !money) return alert("nhap di");
           const newList = [
             ...listUser,
             {
@@ -99,10 +114,18 @@ function App() {
               money: money,
             },
           ];
-          setListUser(newList);
-          const jsonList = JSON.stringify(newList);
+          dispatch({
+            type: "ADD",
+            payload: {
+              id: Math.floor(Math.random() * 100000000),
+              name: name,
+              money: money,
+            },
+          });
+          // setListUser(newList);
+          // const jsonList = JSON.stringify(newList);
 
-          await localStorage.setItem("list", jsonList);
+          // await localStorage.setItem("list", jsonList);
           setName("");
           setMoney(0);
         }}
