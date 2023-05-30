@@ -2,9 +2,20 @@ import { useState } from "react";
 import "./App.css";
 import LoginPage from "./modules/auth/login";
 import RegisterPage from "./modules/auth/register/register";
-const LIST_USER = [];
+const LIST_USER = [
+  {
+    id: Math.floor(Math.random() * 100000000),
+    name: "hehe",
+    money: 1,
+  },
+  {
+    id: Math.floor(Math.random() * 100000000),
+    name: "hehe2",
+    money: 2,
+  },
+];
 
-const Todo = ({ value, index }) => {
+const Todo = ({ value, index, onDeletee }) => {
   return (
     <div
       key={value.id}
@@ -18,7 +29,11 @@ const Todo = ({ value, index }) => {
       <h3>{index + 1}</h3>
       <h3>{value.name}</h3>
       <h3>{value.money}</h3>
-      <button onClick={() => {}}>
+      <button
+        onClick={(e) => {
+          onDeletee(value, index);
+        }}
+      >
         <img
           style={{ height: "20px" }}
           src="https://img.icons8.com/?size=512&id=67884&format=png"
@@ -32,11 +47,25 @@ function App() {
   const [name, setName] = useState("");
   const [money, setMoney] = useState(0);
 
+  const handleDelete = (value, index) => {
+    const removeList = listUser.filter(
+      (valuee, indexx) => valuee.id !== value.id
+    );
+    setListUser(removeList);
+  };
+
   return (
     <div>
       <h1>List todo</h1>
       {listUser.map((value, index) => {
-        return <Todo value={value} index={index} />;
+        return (
+          <Todo
+            key={value.id}
+            value={value}
+            index={index}
+            onDeletee={handleDelete}
+          />
+        );
       })}
       <div>
         <input
@@ -60,16 +89,20 @@ function App() {
       </div>
 
       <button
-        onClick={() => {
+        onClick={async () => {
           if (!name || !money) return alert("nhap di");
-          setListUser([
+          const newList = [
             ...listUser,
             {
               id: Math.floor(Math.random() * 100000000),
               name: name,
               money: money,
             },
-          ]);
+          ];
+          setListUser(newList);
+          const jsonList = JSON.stringify(newList);
+
+          await localStorage.setItem("list", jsonList);
           setName("");
           setMoney(0);
         }}
