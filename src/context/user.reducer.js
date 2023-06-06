@@ -25,6 +25,8 @@ function reducer(state, action) {
       return { ...state, listUser: newList };
     case "REMOVE_USER":
       return { loading: false, user: {} };
+    case "SET_LIST_USER":
+      return { loading: false, listUser: action.payload.listUser };
     case "SHOW_MODAL":
       return {
         ...state,

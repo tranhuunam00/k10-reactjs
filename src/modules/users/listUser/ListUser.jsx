@@ -6,14 +6,19 @@ import { useContext } from "react";
 import UserContext from "../../../context/user.context";
 
 const ListUser = () => {
-  const [listUser, setListUser] = useState([]);
+  // const [listUser, setListUser] = useState([]);
   const [stateGlobal, dispathGlobal] = useContext(UserContext);
 
   const getUser = async () => {
     const userApi = await callAPi({
       domain: "https://jsonplaceholder.typicode.com/users",
     });
-    setListUser(userApi);
+    dispathGlobal({
+      type: "SET_LIST_USER",
+      payload: {
+        listUser: userApi,
+      },
+    });
   };
 
   const onDetailTable = (user) => {
@@ -51,7 +56,7 @@ const ListUser = () => {
       <Table
         onClick={onDetailTable}
         listItem={listItem}
-        dataItem={listUser}
+        dataItem={stateGlobal.listUser}
         isCheck={true}
         editHandle={onEditTable}
       />
