@@ -42,12 +42,24 @@ const HeaderTable = ({ listItem, isCheck }) => {
   );
 };
 
-const BodyTable = ({ dataItem, listItem, isCheck = false }) => {
+const BodyTable = ({
+  editHandle,
+  dataItem,
+  listItem,
+  isCheck = false,
+  onClick,
+}) => {
   return (
     <>
       {dataItem.map((item, index) => {
         return (
-          <div key={index} className={styles.row}>
+          <div
+            onClick={() => {
+              onClick(item);
+            }}
+            key={index}
+            className={`${styles.row} ${styles.tableBody}`}
+          >
             {isCheck && (
               <input
                 style={{
@@ -68,7 +80,12 @@ const BodyTable = ({ dataItem, listItem, isCheck = false }) => {
                 </h3>
               );
             })}
-            <button style={{ marginRight: 30, width: 100 }}>
+            <button
+              onClick={(e) => {
+                editHandle(e, item);
+              }}
+              style={{ marginRight: 30, width: 100 }}
+            >
               <img
                 width="20"
                 height="20"
@@ -91,11 +108,17 @@ const BodyTable = ({ dataItem, listItem, isCheck = false }) => {
   );
 };
 
-const Table = ({ listItem, dataItem, isCheck }) => {
+const Table = ({ listItem, dataItem, isCheck, onClick, editHandle }) => {
   return (
     <div>
       <HeaderTable listItem={listItem} isCheck={isCheck} />
-      <BodyTable isCheck={isCheck} listItem={listItem} dataItem={dataItem} />
+      <BodyTable
+        onClick={onClick}
+        isCheck={isCheck}
+        listItem={listItem}
+        dataItem={dataItem}
+        editHandle={editHandle}
+      />
     </div>
   );
 };

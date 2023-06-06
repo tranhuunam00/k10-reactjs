@@ -2,3 +2,8 @@
   display: flex;
   justify-content: space-between;
 }
+.tableBody {
+  &:hover {
+    background-color: rgb(108, 85, 85);
+  }
+}

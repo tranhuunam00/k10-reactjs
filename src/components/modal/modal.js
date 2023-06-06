@@ -1,10 +1,12 @@
 import { useContext, useState } from "react";
 import UserContext from "../../context/user.context";
+import DetailUser from "../../modules/users/modal/detailUser/DetailUser";
+import EditUser from "../../modules/users/modal/edit/EditUser";
 
 const Modal = () => {
-  const [{ isOpenModal, dataModal: user }, dispatch] = useContext(UserContext);
-  const [name, setName] = useState(user.name);
-  const [money, setMoney] = useState(user.money);
+  const [{ isOpenModal, dataModal: user, typeModal }, dispatch] =
+    useContext(UserContext);
+
   return (
     <div
       style={{
@@ -18,47 +20,8 @@ const Modal = () => {
         alignItems: "center",
       }}
     >
-      <div>
-        <input
-          name="name"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => {
-            const { name, value } = e.target;
-            setName(value);
-          }}
-        ></input>
-        <input
-          name="money"
-          placeholder="Money"
-          value={money}
-          onChange={(e) => {
-            const { name, value } = e.target;
-            setMoney(value);
-          }}
-        ></input>
-        <button
-          onClick={() => {
-            dispatch({
-              type: "CHANGE_USER",
-              payload: {
-                id: user.id,
-                name,
-                money,
-              },
-            });
-          }}
-        >
-          luu
-        </button>
-        <button
-          onClick={() => {
-            dispatch({ type: "HIDE_MODAL" });
-          }}
-        >
-          tat modal
-        </button>
-      </div>
+      {typeModal === "DETAIL_USER" && <DetailUser />}
+      {typeModal === "EDIT_USER" && <EditUser />}
     </div>
   );
 };

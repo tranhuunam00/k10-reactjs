@@ -9,6 +9,7 @@ const InputCustom = ({
   name,
   placeholder,
   validate,
+  value,
   icon,
 }) => {
   return (
@@ -17,6 +18,7 @@ const InputCustom = ({
       <div className={styles.inputCom_box}>
         <img src={icon} alt="" />
         <input
+          value={value}
           name={name}
           onChange={(e) => onChange(e.target)}
           type={type}

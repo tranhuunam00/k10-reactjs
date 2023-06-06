@@ -26,7 +26,13 @@ function reducer(state, action) {
     case "REMOVE_USER":
       return { loading: false, user: {} };
     case "SHOW_MODAL":
-      return { ...state, isOpenModal: true, dataModal: action.payload };
+      return {
+        ...state,
+        isOpenModal: true,
+        dataModal: action.payload.dataModal,
+        typeModal: action.payload.typeModal,
+        onClick: action.payload.onClick,
+      };
     case "HIDE_MODAL":
       return { ...state, isOpenModal: false, dataModal: null };
 
