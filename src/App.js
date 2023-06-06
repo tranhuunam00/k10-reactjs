@@ -1,19 +1,12 @@
 import { useRef, useState } from "react";
 import "./App.css";
+import ListUser from "./components/users/listUser/ListUser";
 
 function App() {
-  const inputRef = useRef(null);
-
-  const [state, setState] = useState(0);
-
-  function handleClick() {
-    inputRef.current.focus();
-    console.log(inputRef.current);
-  }
   return (
     <>
-      <input ref={inputRef} />
-      <button onClick={handleClick}>Focus the input</button>
+      <h1>Users</h1>
+      <ListUser />
     </>
   );
 }
