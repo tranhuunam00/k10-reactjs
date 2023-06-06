@@ -17,9 +17,9 @@ const HeaderTable = ({ listItem, isCheck }) => {
             borderRightWidth: 1,
             borderRightStyle: "solid",
           }}
-          key={item}
+          key={item.label}
         >
-          {item.name}
+          {item.label}
         </h1>
       ))}
       <h1
@@ -59,6 +59,7 @@ const BodyTable = ({ dataItem, listItem, isCheck = false }) => {
             {listItem.map((key, index) => {
               return (
                 <h3
+                  key={key.name}
                   style={{
                     flex: key.space,
                   }}
@@ -90,47 +91,12 @@ const BodyTable = ({ dataItem, listItem, isCheck = false }) => {
   );
 };
 
-const Table = () => {
-  const listItem = [
-    { name: "STT", space: 1 },
-    { name: "id", space: 2 },
-    { name: "name", space: 6 },
-    { name: "address", space: 6 },
-    { name: "sdt", space: 4 },
-    { name: "sex", space: 1 },
-  ];
+const Table = ({ listItem, dataItem, isCheck }) => {
   return (
     <div>
-      <HeaderTable listItem={listItem} isCheck={true} />
-      <BodyTable
-        isCheck={true}
-        listItem={listItem}
-        dataItem={[
-          {
-            STT: 1,
-            id: "id11",
-            name: "quang",
-            address: "hanoi",
-            sdt: 90987,
-            sex: "male",
-          },
-          {
-            STT: 2,
-            id: "id12",
-            name: "hai",
-            address: "hcm",
-            sex: "male",
-          },
-        ]}
-      />
+      <HeaderTable listItem={listItem} isCheck={isCheck} />
+      <BodyTable isCheck={isCheck} listItem={listItem} dataItem={dataItem} />
     </div>
   );
 };
-const ListUser = () => {
-  return (
-    <div>
-      <Table />
-    </div>
-  );
-};
-export default ListUser;
+export default Table;

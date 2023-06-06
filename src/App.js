@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import "./App.css";
-import ListUser from "./components/users/listUser/ListUser";
+import ListUser from "./modules/users/listUser/ListUser";
 
 function App() {
   return (
