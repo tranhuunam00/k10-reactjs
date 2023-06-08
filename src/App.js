@@ -8,13 +8,16 @@ import Modal from "./components/modal/modal";
 
 function App() {
   const [stateGlobal, dispathGlobal] = useContext(UserContext);
-  console.log(stateGlobal);
   return (
-    <>
+    <div
+    // onClick={(e) => {
+    //   if (e.target.id !== "modal") dispathGlobal({ type: "HIDE_MODAL" });
+    // }}
+    >
       <h1>Users</h1>
       <ListUser />
       {stateGlobal.isOpenModal && <Modal />}
-    </>
+    </div>
   );
 }
 

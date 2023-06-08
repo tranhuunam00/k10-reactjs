@@ -5,7 +5,7 @@ const DetailUser = () => {
   const [{ isOpenModal, dataModal: user, typeModal }, dispatch] =
     useContext(UserContext);
   return (
-    <div>
+    <div style={{ backgroundColor: "blue", opacity: 1 }}>
       <h1>Detail</h1>
       <h3>{user.name}</h3>
       <button
