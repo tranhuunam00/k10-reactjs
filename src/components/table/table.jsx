@@ -1,13 +1,17 @@
 import styles from "./style.module.scss";
-const HeaderTable = ({ listItem, isCheck }) => {
+const HeaderTable = ({ listItem, handleCheck, isCheckAll }) => {
   return (
     <div className={styles.row}>
-      {isCheck && (
+      {handleCheck && (
         <input
           style={{
             marginRight: 40,
           }}
+          onChange={(e) => {
+            handleCheck(e, e.target.checked ? "ALL" : "NONE");
+          }}
           type="checkbox"
+          checked={isCheckAll}
         ></input>
       )}
       {listItem.map((item) => (
@@ -46,8 +50,9 @@ const BodyTable = ({
   editHandle,
   dataItem,
   listItem,
-  isCheck = false,
+  handleCheck,
   onClick,
+  listChecked = [],
 }) => {
   return (
     <>
@@ -60,10 +65,20 @@ const BodyTable = ({
             key={index}
             className={`${styles.row} ${styles.tableBody}`}
           >
-            {isCheck && (
+            {handleCheck && (
               <input
+                checked={listChecked.includes(item.id)}
                 style={{
                   marginRight: 40,
+                }}
+                onClick={(e) => e.stopPropagation()}
+                onChange={(e) => {
+                  e.stopPropagation();
+                  handleCheck(
+                    e,
+                    e.target.checked ? "ITEM_CHECK" : "ITEM_UNCHECK",
+                    item
+                  );
                 }}
                 type="checkbox"
               ></input>
@@ -108,16 +123,29 @@ const BodyTable = ({
   );
 };
 
-const Table = ({ listItem, dataItem, isCheck, onClick, editHandle }) => {
+const Table = ({
+  listItem,
+  dataItem,
+  handleCheck,
+  onClick,
+  editHandle,
+  listChecked = [],
+  isCheckAll,
+}) => {
   return (
     <div>
-      <HeaderTable listItem={listItem} isCheck={isCheck} />
+      <HeaderTable
+        listItem={listItem}
+        handleCheck={handleCheck}
+        isCheckAll={isCheckAll}
+      />
       <BodyTable
         onClick={onClick}
-        isCheck={isCheck}
+        handleCheck={handleCheck}
         listItem={listItem}
         dataItem={dataItem}
         editHandle={editHandle}
+        listChecked={listChecked}
       />
     </div>
   );

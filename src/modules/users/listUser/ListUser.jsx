@@ -8,7 +8,8 @@ import UserContext from "../../../context/user.context";
 const ListUser = () => {
   // const [listUser, setListUser] = useState([]);
   const [stateGlobal, dispathGlobal] = useContext(UserContext);
-
+  const [listCheckUser, setListCheckUser] = useState([]);
+  console.log("listCheckUser ", listCheckUser);
   const getUser = async () => {
     const userApi = await callAPi({
       domain: "https://jsonplaceholder.typicode.com/users",
@@ -40,6 +41,29 @@ const ListUser = () => {
       },
     });
   };
+  const handleCheck = (e, type, item) => {
+    e.stopPropagation();
+    let listId = [];
+    if (type == "ALL") {
+      listId = stateGlobal.listUser.map((user) => user.id);
+    }
+    if (type === "NONE") listId = [];
+    if (type === "ITEM_CHECK") {
+      const newList = [...listCheckUser, item.id];
+      listId = newList;
+    }
+    if (type === "ITEM_UNCHECK") {
+      console.log("vao");
+
+      const newList = [...listCheckUser].filter((id) => id !== item.id);
+
+      console.log(newList);
+      listId = newList;
+    }
+    console.log(type);
+    console.log(listId);
+    setListCheckUser(listId);
+  };
   useEffect(() => {
     getUser();
   }, []);
@@ -54,11 +78,14 @@ const ListUser = () => {
   return (
     <div>
       <Table
+        handleCheck={handleCheck}
         onClick={onDetailTable}
         listItem={listItem}
         dataItem={stateGlobal.listUser}
         isCheck={true}
         editHandle={onEditTable}
+        listChecked={listCheckUser}
+        isCheckAll={stateGlobal.listUser.length === listCheckUser.length}
       />
     </div>
   );
